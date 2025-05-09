@@ -55,7 +55,8 @@ def probxz(X, Xp, Y, Yp, Z, Zp, n, np, npp):
     denominator = parallel_sum(omegaxz, (alpha_range, i_range, j_range),
                                (X, Xp, Y, Yp, Z, Zp, n, np, npp))
     if denominator == 0:
-        raise ValueError("Denominator is zero, cannot compute probxz.")
+        #raise ValueError("Denominator is zero, cannot compute probxz.")
+        return 0
     return abs(f.Delta(Xp - n + 0.5) * f.Delta(Zp - npp) * (numerator / denominator))
 
 # Define probxzsimpler function
