@@ -10,20 +10,40 @@ y = 90
 z = 100
 n = 10
 
+'''
 # Load the data from the .npy file
-#filename = f"results_{open_units}_{bridges}_{nb_iterations}.npy"
-#results = np.load(filename)
 filename = f"results_{x}{y}{z}{n}_{nb_tries}_{nb_iterations}.npz"
 results = np.load(filename, allow_pickle=True)
 grouped_angles = results['grouped_angles'].item()  # Convert back to a dictionary
 probs = results['probs']
+'''
 
+# Load the data from the .npy file
+filename = f"results_{x}{y}{z}{n}_{nb_iterations}.npz"
+results = np.load(filename, allow_pickle=True)
+angles = np.array(results['angles'])
+probs = np.array(results['probs'])
+
+y_values = probs - abs(1 - np.cos(angles)) / 2
 
 # Plot the results
 plt.figure(figsize=(10, 6))
+    
+# Plot the curve
+plt.scatter(angles, y_values)
+plt.scatter(angles, probs)
 
-index = 0
 
+# Add labels, legend, and title
+plt.xlabel("XZ angle")
+plt.ylabel("Prob-1/2-cos/2")
+#plt.title("Euclideanity for different (theta_XY, theta_YZ) pairs")
+plt.title("Euclideanity for a fixed (theta_XY, theta_YZ) pair")
+plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')  # Place legend outside the plot
+plt.tight_layout()
+plt.show()
+
+'''
 for (a, b), c_values in grouped_angles.items():
     # Convert c_values to a NumPy array for mathematical operations
     c_values = np.array(c_values)
@@ -48,7 +68,7 @@ plt.title("Euclideanity for Different (XY, YZ) Pairs")
 plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')  # Place legend outside the plot
 plt.tight_layout()
 plt.show()
-
+'''
 
 '''
 # Extract angles and probs

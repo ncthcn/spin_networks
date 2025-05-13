@@ -12,6 +12,9 @@ def parallel_sum(func, ranges, args):
     # print(args, ranges, results)
     return sum(results)
 
+def theta():
+    return 
+
 # Define omegaxz function
 def omegaxz(X, Xp, Y, Yp, Z, Zp, n, np, npp, alpha, i, j):
     try:
